@@ -642,3 +642,42 @@ perform object detection on COCO classes.
 A video demonstration of the VisionOTG application was uploaded on `youtube <https://youtube.com/shorts/mpOZS6spFo8>`_. Furthermore, installers are available for download on `GitHub <https://github.com/BrushQuadX/brushquadx-visionotg/releases/tag/v1.0.1>`_
 to support Windows and Raspberry Pi platforms - no extra steps are needed. 
 
+Key Learning - October 08, 2026
+--------------------------------
+
+**Design Considerations:**
+
+1. Copper EMF blocking shield or copper layer separating the motor driver from the MCU helps reduce the EMF effects on the MCU
+2. Better to place MPU6050 away from electrical noise of the Arduino and other electrical components
+3. The IMU needs to be sitting flat and secured properly to prevent wobbling
+4. Capacitors helps reduce power fluctuations and noise
+5. Position all 4 motors evenly and in the same manner. The start rotation should be consistent
+6. Smaller propeller surface area can cause instability? I think it is better for longer arms and larger propellers to increase the drone surface area - more thrust
+7. Thicker drone arms that doesn't bend is better for stability. The overall surface area of the arms and propeller should be maximized
+8. Choose your components based on the design specifications
+9. Use an oscilloscope to check the PWM signals from the motor gates to see if it is causing sync issues with the motors - ensure consistent PWM frequency across all four motors and enough frequency to drive the motors
+10. Test n-channel mosfet Integrity and ensure drain voltage approaches zero as gate voltage increases
+11. Here are some tips for using the nRF24L01+ module provided by Max Imagination.
+
+    .. list-table::
+        :widths: 50 50
+        :header-rows: 0
+
+        * - .. image:: assets/nrf24_tip_1.jpg
+                :width: 300px
+                :alt: Bad Power = No Radio
+            - .. image:: assets/nrf24_tip_2.jpg
+                :width: 300px
+                :alt: Add a cap, save the signal
+            - .. image:: assets/nrf24_tip_3.jpg
+                :width: 300px
+                :alt: Long Wires?
+
+**Practical Considerations:**
+
+1. Check NRF24 radio communication first before assembling the drone. Always test parts individually
+2. Keep it simple and complexity should not come first. Achieve minimum functionality for initial developments
+3. Better to use solder with lead, but store properly to prevent contamination (ensure proper storage)
+4. Thin kapton tapes do not provide as much insulation as actual electrical tape. Though electrical tape is heavier
+5. Ensure the motor power can carry the total load of the drone
+6. Ensure prototype works before designing a final PCB
