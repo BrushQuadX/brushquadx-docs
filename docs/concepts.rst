@@ -13,23 +13,21 @@ The MOSFET can also be referred to as a switch that turns a signal on or off.
 N-type Doping
 ^^^^^^^^^^^^^^
 
-8 valence electrons is stable
+N-type doping starts with a silicon crystal which is stable by having 8 valence 
+electrons. Each silicon atom consists of 4 valence electrons, but through covalent
+bonding, the electrons are shared achieving 8 valence electrons.
 
-Covalent Bonding:
-Silicon (4 valence electrons)
-Phoshorus (5 valence electrons)
-
-The atoms share valence electrons, but one electron is a remainder causing the
-entire structure to be negatively charged
+Then N-type doping is done by injecting other elements such as phosphorus with 5 
+valence electrons to produce 9 valence electrons in the overall structure. This 
+results in one net electron leaving the entire structure negatively charged.
 
 P- type Doping
 ^^^^^^^^^^^^^^^
 
-Silicon (4 valence electrons)
-Boron (3 valence electrons)
-
-Requires one more electron to complete a stable valence shell, leaving the 
-entire structure positively charged
+P-type doping also starts with a silicon crystal and injected with an element such as
+Boron with 3 valence electrons. This produces 7 valence electrons in the overall
+structure. This results in a debt of one electron from a stable structure, leaving
+the entire structure positively charged.
 
 Design
 ^^^^^^^^
@@ -40,13 +38,21 @@ where the two materials meet.
 
 The PN junction forms when electrons from the N-type material move towards the P-type material.
 When electrons move towards the base and holes move towards the N-type material, an electric field
-forms preventing the movement from going further. The PN-junction is also known as the depletion
+forms preventing further the movement of charges. The PN-junction is also known as the depletion
 region. The region where mobile charges are absent.
+
+.. image:: assets/n-channel-mosfet.png
+   :align: center
+   :alt: N-Channel MOSFET
 
 For an N-Channel MOSFET, the source is connected to ground. When voltage is applied
 from source to drain, there is no current flow at the source because it is grounded, but
-current flows to the drain. Adding more electrons to the drain increases the depletion region at the drain.
+current flows to the drain. Adding more electrons to the drain, increasing the depletion region at the drain.
 The cutoff voltage is the voltage which current does not flow towards the drain.
+
+.. image:: assets/n-mosfet-threshold.png
+   :align: center
+   :alt: N-Channel MOSFET Cutoff Threshold
 
 The gate is separated from the base with a Silicon Dioxide layer. This layer has an extremely
 high resistance preventing current from flowing through the gate. 
@@ -56,6 +62,10 @@ electric field creates a positive terminal at the gate, thus attracting electron
 the base to the top of the structure forming a channel from source to drain. As the voltage
 at the gate increase this forms a large enough channel for electrons to flow from source to drain.
 The voltage which allows current to flow is the threshold voltage.
+
+.. image:: assets/n-mosfet-on.png
+   :align: center
+   :alt: N-Channel MOSFET ON
 
 The gate voltage must be connected back to ground to introduce electrons at the gate thus 
 dissipating the channel from source to drain.
@@ -68,6 +78,10 @@ The saturation region occurs when an electric field forms because of the voltage
 forms from drain to source (VDS). This voltage is formed because of the moving electrons
 from source to drain. The electric field pushes the electrons from source to drain
 thus increasing the depletion region (reducing channel size) near the drain.
+
+.. image:: assets/n-mosfet-saturation.png
+   :align: center
+   :alt: N-Channel MOSFET Saturation
 
 Motors and Lenz' Law
 ---------------------
@@ -94,10 +108,10 @@ Motors are inductive loads as represented by this equation:
 
    V = L\frac{di}{dt}
 
-This means that counteractive forces are introduced to reduce the changes of the system.
+This means that counteractive forces are introduced to reduce the changes of the system and preserves conservation of energy.
 
-* Electromagnetic Induction : the production of a voltage (EMF) when the magnetic flux through a conductor changes
-* Lenz' Law : The induced current flows in a direction that produces a magnetic field opposing the change in magnetic flux that caused it.
+* Electromagnetic Induction: the production of a voltage (EMF) when the magnetic flux through a conductor changes.
+* Lenz' Law: The induced current flows in a direction that produces a magnetic field opposing the change in magnetic flux that caused it.
 
 An induced current is caused by an induced electric field which is created by a changing magnetic field.
 
@@ -183,7 +197,7 @@ the following DC logic levels.
 * 0V -> MOSFET is off (motors are not powered)
 
 What if we want to power the motor only at 50%? If we pass 2.5V to the gate,
-then the MOSFET is 50% ON. Though this seems logical to achieve 50% motor power,
+then the MOSFET is 50% ON. Though this seems logical to achieve 50% motor power, but
 it is highly inefficient. A MOSFET that is not fully open adds resistance to the current
 which can result to wasted power. 
 
