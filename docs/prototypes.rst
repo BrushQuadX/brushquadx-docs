@@ -642,7 +642,59 @@ perform object detection on COCO classes.
 A video demonstration of the VisionOTG application was uploaded on `youtube <https://youtube.com/shorts/mpOZS6spFo8>`_. Furthermore, installers are available for download on `GitHub <https://github.com/BrushQuadX/brushquadx-visionotg/releases/tag/v1.0.1>`_
 to support Windows and Raspberry Pi platforms - no extra steps are needed. 
 
-Key Learning - October 08, 2026
+Prototype 3.0 - October 30, 2026
+---------------------------------
+
+In this log, I have attempted to further stablize the flight of the drone. Here are my attempts.
+
+Looking at the `BrushQuadX_RF24_RXDrone` firmware, the following configuration 
+seems to lift off the drone, but it is very unstable - the drone does not properly 
+lift up straight, but proceeds towards an arbitrary direction. My speculation is
+that the center of gravity is offset causing the drone to gear towards a different direction.
+
+I have enabled the following definition in the configuration file.
+
+.. code-block:: cpp
+    
+    #define FORCE_GYRO_ORIENTATION(X, Y, Z) {imu.gyroADC[PITCH] = -Y; imu.gyroADC[ROLL] =  -X; imu.gyroADC[YAW] = -Z;}
+
+This definition doesn't seem to correctly translate the IMU movements in MultiWii.
+
+* drone roll = - MultiWii ROLL
+* drone pitch = - MultiWii Pitch
+* drone yaw = MultiWii yaw
+
+So I made changes to the definition which seems to correct the MultiWii translations 
+
+.. code-block:: cpp
+    
+    #define FORCE_GYRO_ORIENTATION(X, Y, Z) {imu.gyroADC[PITCH] = Y; imu.gyroADC[ROLL] =  X; imu.gyroADC[YAW] = -Z;}
+    
+I tried to lift off the drone, but seems that it just launches the drone forward and damaged the back propeller as it rolled forward.
+I also tried decreasing P values from the PID for roll and pitch from 3.3 to 2.1, but it did not improve the behaviour. 
+Also the rate and expo for roll and pitch is set to 0.90 and 0.65.
+
+Then I tried the following configuration which is the original source code provided by Electronoobs, but it doesn't properly liftoff 
+(drone just spins uncontrollably), even though this code maps correctly 
+
+* motor[0] => rear right
+* motor[1] => front right
+* motor[2] => rear left
+* motor[3] => front left
+
+and on MultiWii roll, pitch, and yaw are translated properly as the orientations.
+
+.. code-block:: cpp
+
+    motor[0] = PIDMIX(-1,+1,-1); //REAR_R
+    motor[1] = PIDMIX(-1,-1,+1); //FRONT_R
+    motor[2] = PIDMIX(+1,+1,+1); //REAR_L
+    motor[3] = PIDMIX(+1,-1,-1); //FRONT_L
+
+Seems that adjusting the battery so that the center of gravity is balanced somewhat improved the drone liftoff,
+but the due to the excess weight of the components, the drone could not maintain a stable prolonged flight.
+
+Key Learnings - October 08, 2026
 --------------------------------
 
 **Design Considerations:**

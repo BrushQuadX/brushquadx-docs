@@ -66,7 +66,14 @@ Hardware
    :align: center
    :alt: Controller Battery Connection
 
-8. The assembled controller circuit should look like the following.
+8. Add 8 PIN female straight headers (reduces noise) to the pinouts of the NRF24L01 to maintain the signal communication with the drone. Then wrap the 9V battery connector to the frame of the controller using a zip tie.
+
+.. image:: assets/controller_female_extenders.png
+   :width: 400px
+   :align: center
+   :alt: Controller Female Extenders
+
+9. The assembled controller circuit should look like the following.
 
 .. image:: assets/controller_assembled_pcb.jpg
    :width: 400px
